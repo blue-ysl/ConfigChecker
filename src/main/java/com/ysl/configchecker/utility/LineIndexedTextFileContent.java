@@ -7,6 +7,7 @@ public class LineIndexedTextFileContent
 {
     private final Path filePath;
     private final List<String> lines;
+    private String contentInWholeString;
 
     public LineIndexedTextFileContent(Path fileName, List<String> lines)
     {
@@ -15,6 +16,24 @@ public class LineIndexedTextFileContent
 
         this.filePath = fileName;
         this.lines = lines;
+        this.contentInWholeString = null;
+    }
+
+    @Override
+    public String toString()
+    {
+        if (this.contentInWholeString == null)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (String line : this.lines)
+            {
+                sb.append(line).append("\n");
+            }
+
+            this.contentInWholeString = sb.toString();
+        }
+
+        return this.contentInWholeString;
     }
 
     public String getLineOrNull(int lineNumber)
